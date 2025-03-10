@@ -166,262 +166,269 @@
         <p style="text-align: center; color: #666; margin-top: -10px; margin-bottom: 15px;">CHM1321 Module 5: Acid-Base Reactions</p>
         <button class="toggle-all" onclick="toggleAllFactors()">Expand/Collapse All</button>
         
-        <div class="decision-box">
-            What are you trying to determine?
-        </div>
+<div class="decision-box">
+    What are you trying to determine?
+</div>
+
+<div class="path-container">
+    <div class="path">
+        <div class="path-header">Acid Strength / Stability of Conjugate Base (A⁻)</div>
         
-        <div class="path-container">
-            <div class="path">
-                <div class="path-header">Acid Strength / Stability of Conjugate Base (A⁻)</div>
-                
-                <div class="factor-card">
-                    <div class="factor-title" onclick="toggleFactor('size-acid')">
-                        Factor 1: Size
-                        <span>+</span>
-                    </div>
-                    <div id="size-acid" class="factor-content">
-                        <div class="rule">
-                            <strong>Rule:</strong> Larger atoms form stronger acids (when comparing atoms in the same group)
-                        </div>
-                        <div class="exception">
-                            <strong>Exception:</strong> For charged acids (HX⁺), smaller atoms form stronger acids
-                        </div>
-                        <div class="example">
-                            <strong>Examples:</strong>
-                            <ul>
-                                <li>HI > HBr > HCl > HF (increasing acidity down the group)</li>
-                                <li>H₃P-H > H₃N-H (P-H more acidic than N-H)</li>
-                            </ul>
-                            <strong>Why?</strong> Larger atoms better distribute and stabilize the negative charge in A⁻
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="factor-card">
-                    <div class="factor-title" onclick="toggleFactor('en-acid')">
-                        Factor 2: Electronegativity
-                        <span>+</span>
-                    </div>
-                    <div id="en-acid" class="factor-content">
-                        <div class="rule">
-                            <strong>Rule:</strong> More electronegative atoms form stronger acids (when comparing atoms in the same period)
-                        </div>
-                        <div class="exception">
-                            <strong>Exception:</strong> For charged acids (HX⁺), less electronegative atoms form stronger acids
-                        </div>
-                        <div class="example">
-                            <strong>Examples:</strong>
-                            <ul>
-                                <li>HF > H₂O > NH₃ > CH₄ (increasing acidity across the period)</li>
-                                <li>H-O-H > H-N-H > H-C-H (O-H more acidic than N-H)</li>
-                            </ul>
-                            <strong>Why?</strong> More electronegative atoms better stabilize the negative charge in A⁻
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="factor-card">
-                    <div class="factor-title" onclick="toggleFactor('inductive-acid')">
-                        Factor 3: Inductive Effects
-                        <span>+</span>
-                    </div>
-                    <div id="inductive-acid" class="factor-content">
-                        <div class="rule">
-                            <strong>Rule:</strong> Electron-withdrawing groups (EWG) increase acidity
-                        </div>
-                        <div class="exception">
-                            <strong>Important notes:</strong>
-                            <ul>
-                                <li>Effect decreases with distance from acidic site</li>
-                                <li>Multiple groups have cumulative effects</li>
-                                <li>Alkyl groups are electron-donating (decrease acidity)</li>
-                            </ul>
-                        </div>
-                        <div class="example">
-                            <strong>Examples:</strong>
-                            <ul>
-                                <li>CF₃COOH > CH₃COOH (EWG increases acidity)</li>
-                                <li>Cl₃CCOOH > Cl₂CHCOOH > ClCH₂COOH > CH₃COOH</li>
-                                <li>t-BuOH < i-PrOH < EtOH < MeOH (alkyl groups decrease acidity)</li>
-                            </ul>
-                            <strong>Why?</strong> EWGs pull electron density away, helping stabilize A⁻
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="factor-card">
-                    <div class="factor-title" onclick="toggleFactor('hybrid-acid')">
-                        Factor 4: Hybridization
-                        <span>+</span>
-                    </div>
-                    <div id="hybrid-acid" class="factor-content">
-                        <div class="rule">
-                            <strong>Rule:</strong> Higher s-character leads to stronger acids
-                        </div>
-                        <div class="exception">
-                            <strong>Note:</strong> Only relevant for comparing carbon acids or other atoms with different hybridizations
-                        </div>
-                        <div class="example">
-                            <strong>Examples:</strong>
-                            <ul>
-                                <li>sp (50% s) > sp² (33% s) > sp³ (25% s)</li>
-                                <li>HC≡CH (pKa ≈ 25) > H₂C=CH₂ (pKa ≈ 44) > H₃C-CH₃ (pKa ≈ 50)</li>
-                            </ul>
-                            <strong>Why?</strong> Higher s-character means electrons are held closer to the nucleus, stabilizing the negative charge better
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="factor-card">
-                    <div class="factor-title" onclick="toggleFactor('resonance-acid')">
-                        Factor 5: Resonance Effects
-                        <span>+</span>
-                    </div>
-                    <div id="resonance-acid" class="factor-content">
-                        <div class="rule">
-                            <strong>Rule:</strong> Resonance stabilization of conjugate base (A⁻) increases acidity
-                        </div>
-                        <div class="exception">
-                            <strong>Exception:</strong> For charged acids, resonance stabilization of the acid (HX⁺) decreases acidity
-                        </div>
-                        <div class="example">
-                            <strong>Examples:</strong>
-                            <ul>
-                                <li>Carboxylic acids (pKa ≈ 5) > Alcohols (pKa ≈ 16)</li>
-                                <li>Phenols (pKa ≈ 10) > Cyclohexanol (pKa ≈ 18)</li>
-                            </ul>
-                            <strong>Why?</strong> Resonance spreads out the negative charge in A⁻, stabilizing it
-                        </div>
-                    </div>
-                </div>
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('size-acid')">
+                Factor 1: Size
+                <span>+</span>
             </div>
-            
-            <div class="path">
-                <div class="path-header base">Base Strength / Stability of Conjugate Acid (BH⁺)</div>
-                
-                <div class="factor-card">
-                    <div class="factor-title" onclick="toggleFactor('size-base')">
-                        Factor 1: Size
-                        <span>+</span>
-                    </div>
-                    <div id="size-base" class="factor-content">
-                        <div class="rule">
-                            <strong>Rule:</strong> Smaller atoms form stronger bases (when comparing atoms in the same group)
-                        </div>
-                        <div class="exception">
-                            <strong>Exception:</strong> This is opposite to the trend for neutral acids
-                        </div>
-                        <div class="example">
-                            <strong>Examples:</strong>
-                            <ul>
-                                <li>NH₃ > PH₃ (NH₃ is more basic)</li>
-                                <li>OH⁻ > SH⁻ (OH⁻ is more basic)</li>
-                            </ul>
-                            <strong>Why?</strong> Smaller atoms concentrate electron density, making the lone pair more available to share
-                        </div>
-                    </div>
+            <div id="size-acid" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Larger atoms form stronger acids (when comparing atoms in the same group)
                 </div>
-                
-                <div class="factor-card">
-                    <div class="factor-title" onclick="toggleFactor('en-base')">
-                        Factor 2: Electronegativity
-                        <span>+</span>
-                    </div>
-                    <div id="en-base" class="factor-content">
-                        <div class="rule">
-                            <strong>Rule:</strong> Less electronegative atoms form stronger bases (when comparing atoms in the same period)
-                        </div>
-                        <div class="exception">
-                            <strong>Exception:</strong> This is opposite to the trend for neutral acids
-                        </div>
-                        <div class="example">
-                            <strong>Examples:</strong>
-                            <ul>
-                                <li>NH₃ > OH⁻ > F⁻ (NH₃ is more basic)</li>
-                                <li>CH₃⁻ > NH₂⁻ > OH⁻ (CH₃⁻ is more basic)</li>
-                            </ul>
-                            <strong>Why?</strong> Less electronegative atoms hold their electrons less tightly, making them more available to share
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="factor-card">
-                    <div class="factor-title" onclick="toggleFactor('inductive-base')">
-                        Factor 3: Inductive Effects
-                        <span>+</span>
-                    </div>
-                    <div id="inductive-base" class="factor-content">
-                        <div class="rule">
-                            <strong>Rule:</strong> Electron-donating groups (EDG) increase basicity
-                        </div>
-                        <div class="exception">
-                            <strong>Important notes:</strong>
-                            <ul>
-                                <li>Effect decreases with distance from basic site</li>
-                                <li>Alkyl groups are electron-donating (increase basicity)</li>
-                                <li>This is opposite to the trend for acids</li>
-                            </ul>
-                        </div>
-                        <div class="example">
-                            <strong>Examples:</strong>
-                            <ul>
-                                <li>(CH₃)₃N > (CH₃)₂NH > CH₃NH₂ > NH₃ (increasing basicity)</li>
-                                <li>CH₃CH₂NH₂ > NH₃ > CF₃CH₂NH₂ (EWGs decrease basicity)</li>
-                            </ul>
-                            <strong>Why?</strong> EDGs push electron density toward the basic site, making the lone pair more available to share
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="factor-card">
-                    <div class="factor-title" onclick="toggleFactor('hybrid-base')">
-                        Factor 4: Hybridization
-                        <span>+</span>
-                    </div>
-                    <div id="hybrid-base" class="factor-content">
-                        <div class="rule">
-                            <strong>Rule:</strong> Lower s-character leads to stronger bases
-                        </div>
-                        <div class="exception">
-                            <strong>Note:</strong> This is opposite to the trend for acids
-                        </div>
-                        <div class="example">
-                            <strong>Examples:</strong>
-                            <ul>
-                                <li>sp³ (25% s) > sp² (33% s) > sp (50% s)</li>
-                                <li>CH₃NH₂ (sp³) > CH₂=NH (sp²) > HC≡N (sp)</li>
-                            </ul>
-                            <strong>Why?</strong> Lower s-character means electrons are held farther from the nucleus, making them more available to share
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="factor-card">
-                    <div class="factor-title" onclick="toggleFactor('resonance-base')">
-                        Factor 5: Resonance Effects
-                        <span>+</span>
-                    </div>
-                    <div id="resonance-base" class="factor-content">
-                        <div class="rule">
-                            <strong>Rule:</strong> Resonance delocalization of the lone pair decreases basicity
-                        </div>
-                        <div class="exception">
-                            <strong>Exception:</strong> Resonance stabilization of the conjugate acid (BH⁺) increases basicity
-                        </div>
-                        <div class="example">
-                            <strong>Examples:</strong>
-                            <ul>
-                                <li>Piperidine > Pyridine (aromatic resonance decreases basicity)</li>
-                                <li>CH₃NH₂ > CH₃C(=O)NH₂ (resonance in amide decreases basicity)</li>
-                                <li>OH⁻ < CH₃COO⁻ (when conjugate acid is stabilized by resonance)</li>
-                            </ul>
-                            <strong>Why?</strong> Resonance makes the lone pair less available by delocalizing it
-                        </div>
-                    </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>HI > HBr > HCl > HF (increasing acidity down the group)</li>
+                        <li><strong>Why?</strong> Larger atoms (like I, Br) better distribute and stabilize the <span style="color: blue;">⊖</span> charge in A⁻</li>
+                    </ul>
+                    <ul>
+                        <li>H₃O<span style="color: red;">⊕</span> > NH₄<span style="color: red;">⊕</span> (H₃O<span style="color: red;">⊕</span> is more acidic)</li>
+                        <li><strong>Why?</strong> <span style="color: red;">⊕</span> charges are more stable on smaller atoms (like O vs N)</li>
+                    </ul>
+                    <p><strong>Remember:</strong> <span style="color: blue;">⊖</span> are more stable on LARGER atoms, <span style="color: red;">⊕</span> are more stable on SMALLER atoms</p>
                 </div>
             </div>
         </div>
         
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('en-acid')">
+                Factor 2: Electronegativity
+                <span>+</span>
+            </div>
+            <div id="en-acid" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> More electronegative atoms form stronger acids (when comparing atoms in the same period)
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>HF > H₂O > NH₃ > CH₄ (increasing acidity across the period)</li>
+                        <li><strong>Why?</strong> More electronegative atoms (like F, O) better stabilize the <span style="color: blue;">⊖</span> charge in A⁻</li>
+                    </ul>
+                    <ul>
+                        <li>H₃O<span style="color: red;">⊕</span> > NH₄<span style="color: red;">⊕</span> (H₃O<span style="color: red;">⊕</span> is more acidic)</li>
+                        <li><strong>Why?</strong> For charged acids, <span style="color: red;">⊕</span> charges are generally more stable on less electronegative atoms, but the smaller size of O compared to N is the dominant factor here</li>
+                    </ul>
+                    <p><strong>Remember:</strong> <span style="color: blue;">⊖</span> are more stable on MORE electronegative atoms, <span style="color: red;">⊕</span> are more stable on LESS electronegative atoms</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('inductive-acid')">
+                Factor 3: Inductive Effects
+                <span>+</span>
+            </div>
+            <div id="inductive-acid" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Inductive effects can either RAISE or LOWER acidity:
+                    <ul>
+                        <li>Electron-withdrawing groups (EWGs, like F, Cl, CF₃) will stabilize <span style="color: blue;">⊖</span> and increase acidity</li>
+                        <li>Electron-donating groups (EDGs, like CH₃, alkyl groups) will stabilize <span style="color: red;">⊕</span> and decrease acidity</li>
+                    </ul>
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>CF₃COOH > CH₃COOH (EWG increases acidity)</li>
+                        <li>Cl₃CCOOH > Cl₂CHCOOH > ClCH₂COOH > CH₃COOH</li>
+                        <li><strong>Why?</strong> EWGs (like CF₃, Cl) pull electron density away, helping stabilize <span style="color: blue;">⊖</span> in A⁻</li>
+                    </ul>
+                    <ul>
+                        <li>R₃NH<span style="color: red;">⊕</span> < R₂NH₂<span style="color: red;">⊕</span> < RNH₃<span style="color: red;">⊕</span> < NH₄<span style="color: red;">⊕</span> (NH₄<span style="color: red;">⊕</span> is most acidic)</li>
+                        <li><strong>Why?</strong> Alkyl groups (EDGs like CH₃) stabilize <span style="color: red;">⊕</span> charge, making a weaker acid</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('resonance-acid')">
+                Factor 4: Resonance Effects
+                <span>+</span>
+            </div>
+            <div id="resonance-acid" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Resonance effects can either RAISE or LOWER acidity:
+                    <ul>
+                        <li>Delocalizing a <span style="color: blue;">⊖</span> in the conjugate base INCREASES acidity</li>
+                        <li>Delocalizing a <span style="color: red;">⊕</span> in the acid REDUCES acidity</li>
+                    </ul>
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>Carboxylic acids (pKa ≈ 5) > Alcohols (pKa ≈ 16)</li>
+                        <li>Phenols (pKa ≈ 10) > Cyclohexanol (pKa ≈ 18)</li>
+                        <li><strong>Why?</strong> Resonance spreads out the <span style="color: blue;">⊖</span> charge in A⁻ (like in carboxylate), stabilizing it</li>
+                    </ul>
+                    <ul>
+                        <li>R-C=O-H<span style="color: red;">⊕</span>-R > R-C=O-O<span style="color: blue;">⊖</span>-R</li>
+                        <li><strong>Why?</strong> Delocalizing the <span style="color: red;">⊕</span> charge in the acid makes it less acidic</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('hybrid-acid')">
+                Factor 5: Hybridization
+                <span>+</span>
+            </div>
+            <div id="hybrid-acid" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Higher s-character leads to stronger acids
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>sp (50% s) > sp² (33% s) > sp³ (25% s)</li>
+                        <li>HC≡CH (pKa ≈ 25) > H₂C=CH₂ (pKa ≈ 44) > H₃C-CH₃ (pKa ≈ 50)</li>
+                        <li><strong>Why?</strong> Higher s-character means electrons are held closer to the nucleus, stabilizing the <span style="color: blue;">⊖</span> charge better</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="path">
+        <div class="path-header base">Base Strength / Stability of Conjugate Acid (BH⁺)</div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('size-base')">
+                Factor 1: Size
+                <span>+</span>
+            </div>
+            <div id="size-base" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Smaller atoms form stronger bases (when comparing atoms in the same group)
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>NH₃ > PH₃ (NH₃ is more basic)</li>
+                        <li><strong>Why?</strong> Smaller atoms (like N vs P) concentrate electron density, making the lone pair more available to share</li>
+                    </ul>
+                    <ul>
+                        <li>OH<span style="color: blue;">⊖</span> > SH<span style="color: blue;">⊖</span> (OH<span style="color: blue;">⊖</span> is more basic)</li>
+                        <li><strong>Why?</strong> <span style="color: blue;">⊖</span> charges are less stable on smaller atoms (like O vs S), making them more reactive</li>
+                    </ul>
+                    <p><strong>Remember:</strong> <span style="color: blue;">⊖</span> are more stable on LARGER atoms, <span style="color: red;">⊕</span> are more stable on SMALLER atoms</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('en-base')">
+                Factor 2: Electronegativity
+                <span>+</span>
+            </div>
+            <div id="en-base" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Less electronegative atoms form stronger bases (when comparing atoms in the same period)
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>NH₃ > H₂O > HF (NH₃ is more basic)</li>
+                        <li><strong>Why?</strong> Less electronegative atoms (like N vs O) hold their electrons less tightly, making them more available to share</li>
+                    </ul>
+                    <ul>
+                        <li>CH₃<span style="color: blue;">⊖</span> > NH₂<span style="color: blue;">⊖</span> > OH<span style="color: blue;">⊖</span> (CH₃<span style="color: blue;">⊖</span> is more basic)</li>
+                        <li><strong>Why?</strong> <span style="color: blue;">⊖</span> charges are less stable on less electronegative atoms (like C vs N), making them more reactive and therefore stronger bases</li>
+                    </ul>
+                    <p><strong>Remember:</strong> <span style="color: blue;">⊖</span> are more stable on MORE EN atoms, <span style="color: red;">⊕</span> are more stable on LESS EN atoms</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('inductive-base')">
+                Factor 3: Inductive Effects
+                <span>+</span>
+            </div>
+            <div id="inductive-base" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Inductive effects can either RAISE or LOWER basicity:
+                    <ul>
+                        <li>Electron-donating groups (EDGs, like CH₃, alkyl groups) will increase basicity</li>
+                        <li>Electron-withdrawing groups (EWGs, like F, CF₃) will decrease basicity</li>
+                    </ul>
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>(CH₃)₃N > (CH₃)₂NH > CH₃NH₂ > NH₃ (increasing basicity)</li>
+                        <li><strong>Why?</strong> EDGs (like CH₃) push electron density toward the basic site, making the lone pair more available to share</li>
+                    </ul>
+                    <ul>
+                        <li>CH₃CH₂NH₂ > NH₃ > CF₃CH₂NH₂ (CF₃ decreases basicity)</li>
+                        <li><strong>Why?</strong> EWGs (like CF₃) pull electron density away from the basic site, making the lone pair less available</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('resonance-base')">
+                Factor 4: Resonance Effects
+                <span>+</span>
+            </div>
+            <div id="resonance-base" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Resonance effects can either RAISE or LOWER basicity:
+                    <ul>
+                        <li>Resonance delocalization of the lone pair DECREASES basicity</li>
+                        <li>Resonance stabilization of the conjugate acid (BH<span style="color: red;">⊕</span>) INCREASES basicity</li>
+                    </ul>
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>Piperidine > Pyridine (pyridine is less basic)</li>
+                        <li><strong>Why?</strong> Aromatic resonance in pyridine delocalizes the lone pair, making it less available</li>
+                    </ul>
+                    <ul>
+                        <li>CH₃NH₂ > CH₃C(=O)NH₂ (amide is less basic)</li>
+                        <li><strong>Why?</strong> Resonance in amide delocalizes the lone pair between N and C=O, making it less available</li>
+                    </ul>
+                    <ul>
+                        <li>R-C=O-O<span style="color: blue;">⊖</span>-R > R-C=O-H<span style="color: red;">⊕</span>-R (in terms of basicity)</li>
+                        <li><strong>Why?</strong> Resonance delocalization of <span style="color: blue;">⊖</span> charge in carboxylate makes it less basic</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('hybrid-base')">
+                Factor 5: Hybridization
+                <span>+</span>
+            </div>
+            <div id="hybrid-base" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Lower s-character leads to stronger bases
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>sp³ (25% s) > sp² (33% s) > sp (50% s)</li>
+                        <li>CH₃NH₂ (sp³) > CH₂=NH (sp²) > HC≡N (sp)</li>
+                        <li><strong>Why?</strong> Lower s-character means electrons are held farther from the nucleus, making them more available to share</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
         <div class="application-section">
             <h2>Applying These Rules: Decision Flowchart</h2>
             
