@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acid-Base Decision Flowchart</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.5;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px;
+            background-color: #f8f9fa;
+        }
+        
+        .flowchart-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .decision-box {
+            background-color: #e3f2fd;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 30px 0 15px 0; /* Added more top margin */
+            text-align: center;
+            font-weight: bold;
+            clear: both; /* Ensures it starts below all floated elements */
+        }
+        
+        .path-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            gap: 20px;
+        }
+        
+        .path {
+            flex: 1;
+            padding: 0;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        .path-header {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            font-weight: bold;
+        }
+        
+        .path-header.base {
+            background-color: #9c27b0;
+        }
+        
+        /* Styling for diagram sections */
+        .diagrams-container {
+            margin-bottom: 40px; /* Add more bottom margin to separate from decision box */
+        }
+        
+        .diagram-header-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        
+        .diagram-header {
+            flex: 1;
+            text-align: center;
+            font-weight: bold;
+            padding: 5px;
+        }
+        
+        .acid-header {
+            color: #e53935;
+        }
+        
+        .base-header {
+            color: #9c27b0;
+        }
+        
+        .diagram-row {
+            display: flex;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+        
+        .diagram-box {
+            flex: 1;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            min-height: 550px; /* Increased height */
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .diagram-title {
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .diagram-image-container {
+            text-align: center;
+            padding: 10px 0;
+        }
+        
+        .diagram-image {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .energy-caption {
+            font-weight: bold;
+            text-align: center;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        
+        .acid-color {
+            color: #e53935;
+        }
+        
+        .base-color {
+            color: #9c27b0;
+        }
+        
+        .diagram-factors {
+            margin: 10px 0;
+        }
+        
+        .diagram-factors ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .diagram-factors li {
+            margin-bottom: 5px;
+        }
+        
+        .diagram-note {
+            font-style: italic;
+            margin-top: auto; /* Push to bottom */
+            padding: 8px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+        
+        .acid-note {
+            background-color: #ffebee;
+        }
+        
+        .base-note {
+            background-color: #f3e5f5;
+        }
+        
+        /* Rest of your CSS stays the same */
+        .factor-card {
+            margin: 10px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+        
+        .factor-title {
+            background-color: #f1f1f1;
+            padding: 8px 12px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .factor-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .rule {
+            background-color: #e8f5e9;
+            margin: 0;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .exception {
+            background-color: #fce4ec;
+            margin: 0;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .example {
+            background-color: #f9fbe7;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .toggle-all:hover {
+            background-color: #0d5aa7 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="flowchart-container">
+        <h1>Acid-Base Decision Flowchart</h1>
+        <p style="text-align: center; color: #666; margin-top: -10px; margin-bottom: 15px;">CHM1321 Module 5: Acid-Base Reactions</p>
+        <div style="text-align: center; margin: 20px 0 30px 0;">
+            <button class="toggle-all" onclick="toggleAllFactors()" style="
+                background-color: #1976d2;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 6px;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 14px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                transition: background-color 0.2s ease-in-out;">
+                Expand/Collapse All
+            </button>
+        </div>
+        <div style="margin-bottom: 30px; background-color: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+            <h2 style="text-align: center; color: #2c3e50; margin-bottom: 15px;">Understanding Acid-Base Strength</h2>
+            
+            <!-- Master Diagram -->
+            <div style="background: linear-gradient(135deg, #e8f5e9, #e3f2fd); border-radius: 12px; padding: 25px; margin: 30px auto; box-shadow: 0 6px 20px rgba(0,0,0,0.15); text-align: center; max-width: 650px; position: relative; overflow: hidden; border: 1px solid rgba(25,118,210,0.1);">
+                
+                <!-- Decorative elements -->
+                <div style="
+                    position: absolute;
+                    top: -15px;
+                    left: -15px;
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                    background: radial-gradient(circle, rgba(25,118,210,0.1) 0%, rgba(25,118,210,0) 70%);"></div>
+                <div style="
+                    position: absolute;
+                    bottom: -20px;
+                    right: -20px;
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    background: radial-gradient(circle, rgba(76,175,80,0.1) 0%, rgba(76,175,80,0) 70%);"></div>
+                
+                <h3 style="
+                    color: #2c3e50;
+                    margin-top: 0;
+                    margin-bottom: 20px;
+                    font-size: 22px;
+                    position: relative;
+                    display: inline-block;">
+                    Master Energy Diagram
+                    <div style="
+                        position: absolute;
+                        bottom: -5px;
+                        left: 0;
+                        width: 100%;
+                        height: 3px;
+                        background: linear-gradient(to right, #1976d2, #4caf50);"></div>
+                </h3>
+                
+                <div style="
+                    background-color: white;
+                    border-radius: 8px;
+                    padding: 15px;
+                    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+                    margin-bottom: 20px;">
+                    <img src="images/Master_diagram.png" alt="Master Diagram" style="max-width: 100%; height: auto;">
+                </div>
+                
+                <div style="
+                    background-color: #1976d2;
+                    color: white;
+                    padding: 10px 20px;
+                    border-radius: 30px;
+                    display: inline-block;
+                    font-weight: bold;
+                    font-size: 1.2em;
+                    margin-bottom: 15px;
+                    box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    SMALLER ENERGY GAP = STRONGER ACID/BASE
+                </div>
+                
+                <p style="
+                    color: #37474f;
+                    font-size: 16px;
+                    line-height: 1.5;
+                    margin-bottom: 0;
+                    max-width: 550px;
+                    margin-left: auto;
+                    margin-right: auto;">
+                    Acid and base strength depends on the energy gap between reactants and products. This fundamental principle guides our understanding of acid-base behavior.
+                </p>
+            </div>
+            
+            <!-- Acid-Base Diagrams Container -->
+            <div class="diagrams-container">
+                <!-- Headers for columns -->
+                <div class="diagram-header-row">
+                    <div class="diagram-header acid-header">Acid Diagrams</div>
+                    <div class="diagram-header base-header">Base Diagrams</div>
+                </div>
+                
+                <!-- First row: Neutral Acids and Bases -->
+                <div class="diagram-row">
+                    <!-- Neutral Acids -->
+                    <div class="diagram-box">
+                        <h4 class="diagram-title">Neutral Acids (HA)</h4>
+                        <div class="diagram-image-container">
+                            <img src="images/Neutral_Acids.png" alt="Neutral Acids Diagram" class="diagram-image">
+                        </div>
+                        <p class="energy-caption acid-color" style="background: linear-gradient(to right, #ffebee, #ffcdd2); padding: 8px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 15px; letter-spacing: 0.5px; margin: 15px 0;">⚡ SMALLER ENERGY GAP = STRONGER ACID! ⚡</p>                        <div class="diagram-factors">
+                            <ul>
+                                <li>Factors that destabilize HA make it easier to lose H<sup>+</sup>, creating a stronger acid</li>
+                                <li>Factors that stabilize A<sup>-</sup> make H<sup>+</sup> loss more favorable, creating a stronger acid</li>
+                            </ul>
+                        </div>
+                        <p class="diagram-note acid-note">
+                            <strong>Summary:</strong> All 5 factors work by either raising HA's energy or lowering A<sup>-</sup>'s energy
+                        </p>
+                    </div>
+                    
+                    <!-- Neutral Bases -->
+                    <div class="diagram-box">
+                        <h4 class="diagram-title">Neutral Bases (B)</h4>
+                        <div class="diagram-image-container">
+                            <img src="images/Neutral_Bases.png" alt="Neutral Bases Diagram" class="diagram-image">
+                        </div>
+                        <p class="energy-caption base-color" style="background: linear-gradient(to right, #f3e5f5, #e1bee7); padding: 8px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 15px; letter-spacing: 0.5px; margin: 15px 0;">⚡ SMALLER ENERGY GAP = STRONGER BASE! ⚡</p>                        <div class="diagram-factors">
+                            <ul>
+                                <li>Factors that stabilize B increase its electron availability, creating a stronger base</li>
+                                <li>Factors that destabilize HB<sup>+</sup> make H<sup>+</sup> more easily accepted, creating a stronger base</li>
+                            </ul>
+                        </div>
+                        <p class="diagram-note base-note">
+                            <strong>Summary:</strong> All 5 factors work by either lowering B's energy or raising HB<sup>+</sup>'s energy
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Second row: Charged Acids and Bases -->
+                <div class="diagram-row">
+                    <!-- Charged Acids -->
+                    <div class="diagram-box">
+                        <h4 class="diagram-title">Charged Acids (HX<sup>+</sup>)</h4>
+                        <div class="diagram-image-container">
+                            <img src="images/Charged_acids_diagram.png" alt="Charged Acids Diagram" class="diagram-image">
+                        </div>
+                        <p class="energy-caption acid-color">SMALLER ENERGY GAP = STRONGER ACID</p>
+                        <div class="diagram-factors">
+                            <ul>
+                                <li>Factors that destabilize HX<sup>+</sup> make it easier to lose H<sup>+</sup>, creating a stronger acid</li>
+                                <li>Factors that stabilize X make H<sup>+</sup> loss more favorable, creating a stronger acid</li>
+                            </ul>
+                        </div>
+                        <p class="diagram-note acid-note">
+                            <strong>For charged acids</strong>, trends are essentially reversed - Smaller atoms and less electronegative atoms make stronger acids
+                        </p>
+                    </div>
+                    
+                    <!-- Charged Bases -->
+                    <div class="diagram-box">
+                        <h4 class="diagram-title">Charged Bases (X<sup>-</sup>)</h4>
+                        <div class="diagram-image-container">
+                            <img src="images/Charged_bases.png" alt="Charged Bases Diagram" class="diagram-image">
+                        </div>
+                        <p class="energy-caption base-color">SMALLER ENERGY GAP = STRONGER BASE</p>
+                        <div class="diagram-factors">
+                            <ul>
+                                <li>Factors that destabilize X<sup>-</sup> increase its reactivity, creating a stronger base</li>
+                                <li>Factors that stabilize HX make H<sup>+</sup> addition more favorable, creating a stronger base</li>
+                            </ul>
+                        </div>
+                        <p class="diagram-note base-note">
+                            <strong>For charged bases</strong>, trends follow the same principles - destabilizing X<sup>-</sup> makes it more reactive. Smaller atoms and less electronegative atoms create stronger charged bases.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); border-radius: 12px; padding: 25px; margin: 30px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid #a5d6a7; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(76,175,80,0.1) 0%, rgba(76,175,80,0) 70%);"></div>
+            <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, rgba(76,175,80,0.1) 0%, rgba(76,175,80,0) 70%);"></div>
+            <h3 style="text-align: center; color: #2e7d32; margin-top: 0; font-size: 24px; position: relative; display: inline-block; width: 100%;">
+                <span style="font-size: 22px; margin-right: 8px;">⚡</span> Key Energy Relationships
+                <div style="position: absolute; bottom: -5px; left: 25%; width: 50%; height: 3px; background: linear-gradient(to right, transparent, #2e7d32, transparent);"></div>
+            </h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                <div style="flex: 1; min-width: 300px; background-color: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; flex-direction: column;">
+                    <h4 style="color: #e53935; margin-top: 0; text-align: center;">Acid Strength</h4>
+                    <p style="text-align: center;"><strong>Smaller Energy Gap = Stronger Acid</strong></p>
+                    <div style="flex-grow: 1; min-height: 80px;">
+                        <p>All five factors work by either:</p>
+                        <ul>
+                            <li>Raising HA's energy (destabilizing the acid)</li>
+                            <li>Lowering A⁻'s energy (stabilizing the conjugate base)</li>
+                        </ul>
+                    </div>
+                    <div style="background-color: #ffebee; border: 1px solid #ef9a9a; border-radius: 5px; padding: 8px; text-align: center; font-style: italic;">
+                        Remember: Stronger acids have weaker conjugate bases
+                    </div>
+                </div>
+                
+                <div style="flex: 1; min-width: 300px; background-color: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; flex-direction: column;">
+                    <h4 style="color: #9c27b0; margin-top: 0; text-align: center;">Base Strength</h4>
+                    <p style="text-align: center;"><strong>Smaller Energy Gap = Stronger Base</strong></p>
+                    <div style="flex-grow: 1; min-height: 80px;">
+                        <p>All five factors work by either:</p>
+                        <ul>
+                            <li>Lowering B's energy (stabilizing the base)</li>
+                            <li>Raising BH⁺'s energy (destabilizing the conjugate acid)</li>
+                        </ul>
+                    </div>
+                    <div style="background-color: #f3e5f5; border: 1px solid #ce93d8; border-radius: 5px; padding: 8px; text-align: center; font-style: italic;">
+                        Remember: Stronger bases have weaker conjugate acids
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="decision-box" style="background: linear-gradient(to right, #e3f2fd, #bbdefb); padding: 18px; border: none; box-shadow: 0 3px 10px rgba(25,118,210,0.2); position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -30px; right: -30px; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, rgba(25,118,210,0.1) 0%, rgba(25,118,210,0) 70%);"></div>
+            <div style="position: absolute; bottom: -20px; left: -20px; width: 60px; height: 60px; border-radius: 50%; background: radial-gradient(circle, rgba(25,118,210,0.1) 0%, rgba(25,118,210,0) 70%);"></div>
+            <div style="font-size: 20px; font-weight: bold; color: #1976d2; text-shadow: 1px 1px 0 rgba(255,255,255,0.5);">🔍 What are you trying to determine?</div>
+        </div>
+
+<div class="path-container">
+    <div class="path">
+        <div class="path-header" style="background: linear-gradient(to right, #e53935, #f44336); padding: 12px; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; right: 0; width: 40px; height: 40px; background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);"></div>
+            <span style="font-size: 16px; font-weight: bold; letter-spacing: 0.5px;">🧪 Acid Strength / Stability of Conjugate Base (A⁻)</span>
+        </div>        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('size-acid')">
+                📏 Factor 1: Size
+                <span>+</span>
+            </div>
+            <div id="size-acid" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Larger atoms form stronger acids (when comparing atoms in the same group)
+                    <p><strong>Energy Effect:</strong> Larger atoms better stabilize the negative charge in A⁻, lowering its energy → smaller energy gap → stronger acid</p>
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>HI > HBr > HCl > HF (increasing acidity down the group)</li>
+                        <li><strong>Why?</strong> Larger atoms (like I, Br) better distribute and stabilize the <span style="color: blue;">⊖</span> charge in A⁻</li>
+                    </ul>
+                    <ul>
+                        <li>H₃O<span style="color: red;">⊕</span> > NH₄<span style="color: red;">⊕</span> (H₃O<span style="color: red;">⊕</span> is more acidic)</li>
+                        <li><strong>Why?</strong> <span style="color: red;">⊕</span> charges are more stable on smaller atoms (like O vs N)</li>
+                    </ul>
+                    <p><strong>Remember:</strong> <span style="color: blue;">⊖</span> are more stable on LARGER atoms, <span style="color: red;">⊕</span> are more stable on SMALLER atoms</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('en-acid')">
+                ⚡Factor 2: Electronegativity
+                <span>+</span>
+            </div>
+            <div id="en-acid" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> More electronegative atoms form stronger acids (when comparing atoms in the same period)
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>HF > H₂O > NH₃ > CH₄ (increasing acidity across the period)</li>
+                        <li><strong>Why?</strong> More electronegative atoms (like F, O) better stabilize the <span style="color: blue;">⊖</span> charge in A⁻</li>
+                    </ul>
+                    <ul>
+                        <li>H₃O<span style="color: red;">⊕</span> > NH₄<span style="color: red;">⊕</span> (H₃O<span style="color: red;">⊕</span> is more acidic)</li>
+                        <li><strong>Why?</strong> For charged acids, <span style="color: red;">⊕</span> charges are more stable on LESS EN atoms, but in this case, the smaller size of O makes it a stronger acid</li>
+                    </ul>
+                    <p><strong>Remember:</strong> <span style="color: blue;">⊖</span> are more stable on MORE electronegative atoms, <span style="color: red;">⊕</span> are more stable on LESS electronegative atoms</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('inductive-acid')">
+                🧲 Factor 3: Inductive Effects
+                <span>+</span>
+            </div>
+            <div id="inductive-acid" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Inductive effects can either RAISE or LOWER acidity:
+                    <ul>
+                        <li>Electron-withdrawing groups (EWGs, like F, Cl, CF₃) will stabilize <span style="color: blue;">⊖</span> and increase acidity</li>
+                        <li>Electron-donating groups (EDGs, like CH₃, alkyl groups) will stabilize <span style="color: red;">⊕</span> and decrease acidity</li>
+                    </ul>
+                    <p><strong>Energy Effect:</strong> EWGs lower A⁻'s energy → smaller energy gap → stronger acid</p>
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>CF₃COOH > CH₃COOH (EWG increases acidity)</li>
+                        <li>Cl₃CCOOH > Cl₂CHCOOH > ClCH₂COOH > CH₃COOH</li>
+                        <li><strong>Why?</strong> EWGs (like CF₃, Cl) pull electron density away, helping stabilize <span style="color: blue;">⊖</span> in A⁻</li>
+                    </ul>
+                    <ul>
+                        <li>R₃NH<span style="color: red;">⊕</span> < R₂NH₂<span style="color: red;">⊕</span> < RNH₃<span style="color: red;">⊕</span> < NH₄<span style="color: red;">⊕</span> (NH₄<span style="color: red;">⊕</span> is most acidic)</li>
+                        <li><strong>Why?</strong> Alkyl groups (EDGs like CH₃) stabilize <span style="color: red;">⊕</span> charge, making a weaker acid</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('resonance-acid')">
+                ↔️ Factor 4: Resonance Effects
+                <span>+</span>
+            </div>
+            <div id="resonance-acid" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Resonance effects can either RAISE or LOWER acidity:
+                    <ul>
+                        <li>Delocalizing a <span style="color: blue;">⊖</span> in the conjugate base INCREASES acidity</li>
+                        <li>Delocalizing a <span style="color: red;">⊕</span> in the acid REDUCES acidity</li>
+                    </ul>
+                    <p><strong>Energy Effect:</strong> Resonance stabilization of A⁻ lowers its energy → smaller energy gap → stronger acid</p>
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>Carboxylic acids (pKa ≈ 5) > Alcohols (pKa ≈ 16)</li>
+                        <li>Phenols (pKa ≈ 10) > Cyclohexanol (pKa ≈ 18)</li>
+                        <li><strong>Why?</strong> Resonance spreads out the <span style="color: blue;">⊖</span> charge in A⁻ (like in carboxylate), stabilizing it</li>
+                    </ul>
+                    <ul>
+                        <li>R-C=O-H<span style="color: red;">⊕</span>-R > R-C=O-O<span style="color: blue;">⊖</span>-R</li>
+                        <li><strong>Why?</strong> Delocalizing the <span style="color: red;">⊕</span> charge in the acid makes it less acidic</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('hybrid-acid')">
+                🔄 Factor 5: Hybridization
+                <span>+</span>
+            </div>
+            <div id="hybrid-acid" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Higher s-character leads to stronger acids
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>sp (50% s) > sp² (33% s) > sp³ (25% s)</li>
+                        <li>HC≡CH (pKa ≈ 25) > H₂C=CH₂ (pKa ≈ 44) > H₃C-CH₃ (pKa ≈ 50)</li>
+                        <li><strong>Why?</strong> Higher s-character means electrons are held closer to the nucleus, stabilizing the <span style="color: blue;">⊖</span> charge better</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="path">
+        <div class="path-header base" style="background: linear-gradient(to right, #9c27b0, #ab47bc); padding: 12px; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: 0; right: 0; width: 40px; height: 40px; background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);"></div>
+            <span style="font-size: 16px; font-weight: bold; letter-spacing: 0.5px;">🧪 Base Strength / Stability of Conjugate Acid (HB⁺)</span>
+        </div>        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('size-base')">
+                📏 Factor 1: Size
+                <span>+</span>
+            </div>
+            <div id="size-base" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Smaller atoms form stronger bases (when comparing atoms in the same group)
+                    <p><strong>Energy Effect:</strong> Smaller atoms concentrate electron density, making the lone pair more available → smaller energy gap → stronger base</p>
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>NH₃ > PH₃ (NH₃ is more basic)</li>
+                        <li><strong>Why?</strong> Smaller atoms (like N vs P) concentrate electron density, making the lone pair more available to share</li>
+                    </ul>
+                    <ul>
+                        <li>OH<span style="color: blue;">⊖</span> > SH<span style="color: blue;">⊖</span> (OH<span style="color: blue;">⊖</span> is more basic)</li>
+                        <li><strong>Why?</strong> <span style="color: blue;">⊖</span> charges are less stable on smaller atoms (like O vs S), making them more reactive</li>
+                    </ul>
+                    <p><strong>Remember:</strong> <span style="color: blue;">⊖</span> are more stable on LARGER atoms, <span style="color: red;">⊕</span> are more stable on SMALLER atoms</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('en-base')">
+                ⚡Factor 2: Electronegativity
+                <span>+</span>
+            </div>
+            <div id="en-base" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Less electronegative atoms form stronger bases (when comparing atoms in the same period)
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>NH₃ > H₂O > HF (NH₃ is more basic)</li>
+                        <li><strong>Why?</strong> Less electronegative atoms (like N vs O) hold their electrons less tightly, making them more available to share</li>
+                    </ul>
+                    <ul>
+                        <li>CH₃<span style="color: blue;">⊖</span> > NH₂<span style="color: blue;">⊖</span> > OH<span style="color: blue;">⊖</span> (CH₃<span style="color: blue;">⊖</span> is more basic)</li>
+                        <li><strong>Why?</strong> <span style="color: blue;">⊖</span> charges are less stable on less electronegative atoms (like C vs N), making them more reactive and therefore stronger bases</li>
+                    </ul>
+                    <p><strong>Remember:</strong> <span style="color: blue;">⊖</span> are more stable on MORE EN atoms, <span style="color: red;">⊕</span> are more stable on LESS EN atoms</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('inductive-base')">
+                🧲 Factor 3: Inductive Effects
+                <span>+</span>
+            </div>
+            <div id="inductive-base" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Inductive effects can either RAISE or LOWER basicity:
+                    <ul>
+                        <li>Electron-donating groups (EDGs, like CH₃, alkyl groups) will increase basicity</li>
+                        <li>Electron-withdrawing groups (EWGs, like F, CF₃) will decrease basicity</li>
+                    </ul>
+                    <p><strong>Energy Effect:</strong> EDGs make the lone pair more available → smaller energy gap → stronger base</p>
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>(CH₃)₃N > (CH₃)₂NH > CH₃NH₂ > NH₃ (increasing basicity)</li>
+                        <li><strong>Why?</strong> EDGs (like CH₃) push electron density toward the basic site, making the lone pair more available to share</li>
+                    </ul>
+                    <ul>
+                        <li>CH₃CH₂NH₂ > NH₃ > CF₃CH₂NH₂ (CF₃ decreases basicity)</li>
+                        <li><strong>Why?</strong> EWGs (like CF₃) pull electron density away from the basic site, making the lone pair less available</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('resonance-base')">
+                ↔️ Factor 4: Resonance Effects
+                <span>+</span>
+            </div>
+            <div id="resonance-base" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Resonance effects can either RAISE or LOWER basicity:
+                    <ul>
+                        <li>Resonance delocalization of the lone pair DECREASES basicity</li>
+                        <li>Resonance stabilization of the conjugate acid (BH<span style="color: red;">⊕</span>) INCREASES basicity</li>
+                    </ul>
+                    <p><strong>Energy Effect:</strong> Resonance delocalization of the lone pair makes it less available → larger energy gap → weaker base</p>
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>Piperidine > Pyridine (pyridine is less basic)</li>
+                        <li><strong>Why?</strong> Aromatic resonance in pyridine delocalizes the lone pair, making it less available</li>
+                    </ul>
+                    <ul>
+                        <li>CH₃NH₂ > CH₃C(=O)NH₂ (amide is less basic)</li>
+                        <li><strong>Why?</strong> Resonance in amide delocalizes the lone pair between N and C=O, making it less available</li>
+                    </ul>
+                    <ul>
+                        <li>R-C=O-O<span style="color: blue;">⊖</span>-R > R-C=O-H<span style="color: red;">⊕</span>-R (in terms of basicity)</li>
+                        <li><strong>Why?</strong> Resonance delocalization of <span style="color: blue;">⊖</span> charge in carboxylate makes it less basic</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="factor-card">
+            <div class="factor-title" onclick="toggleFactor('hybrid-base')">
+                🔄 Factor 5: Hybridization
+                <span>+</span>
+            </div>
+            <div id="hybrid-base" class="factor-content">
+                <div class="rule">
+                    <strong>Rule:</strong> Lower s-character leads to stronger bases
+                </div>
+                <div class="example">
+                    <strong>Examples:</strong>
+                    <ul>
+                        <li>sp³ (25% s) > sp² (33% s) > sp (50% s)</li>
+                        <li>CH₃NH₂ (sp³) > CH₂=NH (sp²) > HC≡N (sp)</li>
+                        <li><strong>Why?</strong> Lower s-character means electrons are held farther from the nucleus, making them more available to share</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="application-section" style="
+    background-color: #f1f8e9;
+    border-radius: 10px;
+    border: 2px solid #7cb342;
+    padding: 25px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+    
+    <h2 style="
+        text-align: center;
+        color: #33691e;
+        margin-top: 0;
+        margin-bottom: 25px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #aed581;
+        font-size: 24px;">Applying These Rules: Decision Flowchart</h2>
+    
+    <!-- Step 1 -->
+    <div class="flowchart-step" style="
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="background: linear-gradient(135deg, #33691e, #558b2f); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px; flex-shrink: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.2); text-shadow: 1px 1px 1px rgba(0,0,0,0.3);">1</div>
+            <h3 style="margin: 0; color: #33691e; font-size: 18px; display: flex; align-items: center;">
+                <span style="margin-right: 8px;">🎯</span> Identify your task:
+            </h3>
+        </div>
+        <ul style="
+            margin: 0;
+            padding-left: 50px;
+            list-style-type: none;">
+            <li style="
+                margin-bottom: 8px;
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Finding the strongest acid in a group of molecules
+            </li>
+            <li style="
+                margin-bottom: 8px;
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Finding the strongest base in a group of molecules
+            </li>
+            <li style="
+                margin-bottom: 8px;
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Identifying the most acidic proton in a molecule
+            </li>
+            <li style="
+                margin-bottom: 8px;
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Identifying the most basic site in a molecule
+            </li>
+            <li style="
+                margin-bottom: 8px;
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Determining conjugate acid/base
+            </li>
+            <li style="
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Predicting reaction direction
+            </li>
+        </ul>
+    </div>
+    
+    <!-- Arrow between steps -->
+    <div style="
+        text-align: center;
+        margin: 20px 0;
+        position: relative;">
+        <div style="
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid #7cb342;
+            margin: 0 auto;"></div>
+        <div style="
+            width: 2px;
+            height: 15px;
+            background-color: #7cb342;
+            margin: 0 auto;"></div>
+    </div>
+    
+    <!-- Step 2 -->
+    <div class="flowchart-step" style="
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="background: linear-gradient(135deg, #33691e, #558b2f); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 15px; flex-shrink: 0; box-shadow: 0 2px 5px rgba(0,0,0,0.2); text-shadow: 1px 1px 1px rgba(0,0,0,0.3);">2</div>
+            <h3 style="margin: 0; color: #33691e; font-size: 18px; display: flex; align-items: center;">
+                <span style="margin-right: 8px;">⚖️</span> For acid-base comparisons:
+            </h3>
+        </div>
+        
+        <ul style="
+            margin: 0;
+            padding-left: 50px;
+            list-style-type: none;">
+            <li style="
+                margin-bottom: 8px;
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                If possible, look up pKa values (lower pKa = stronger acid)
+            </li>
+            <li style="
+                margin-bottom: 8px;
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                When pKa values aren't available, apply the 5 factors
+            </li>
+            <li style="
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Remember that factors may conflict - resonance and inductive effects often dominate
+            </li>
+        </ul>
+    </div>
+    
+    <!-- Arrow between steps -->
+    <div style="
+        text-align: center;
+        margin: 20px 0;
+        position: relative;">
+        <div style="
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid #7cb342;
+            margin: 0 auto;"></div>
+        <div style="
+            width: 2px;
+            height: 15px;
+            background-color: #7cb342;
+            margin: 0 auto;"></div>
+    </div>
+    
+    <!-- Step 3 -->
+    <div class="flowchart-step" style="
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="
+                background-color: #33691e;
+                color: white;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                margin-right: 15px;
+                flex-shrink: 0;">3</div>
+            <h3 style="margin: 0; color: #33691e; font-size: 18px;">🔬 For finding most acidic proton:</h3>
+        </div>
+        
+        <ul style="
+            margin: 0;
+            padding-left: 50px;
+            list-style-type: none;">
+            <li style="
+                margin-bottom: 8px;
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Identify all protons that could potentially be acidic
+            </li>
+            <li style="
+                margin-bottom: 8px;
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Compare their approximate pKa values from related compounds
+            </li>
+            <li style="
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Consider functional group trends (your pKa sheet!): 
+                <span style="font-family: monospace;">RCOOH (pKa~5) > RSH (pKa~10) > ROH (pKa~16) > RC≡CH (pKa~25) > RNH₂ (pKa~38) > RC=CH₂ (pKa~44) > RCH₃ (pKa~50)</span>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- Arrow between steps -->
+    <div style="
+        text-align: center;
+        margin: 20px 0;
+        position: relative;">
+        <div style="
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid #7cb342;
+            margin: 0 auto;"></div>
+        <div style="
+            width: 2px;
+            height: 15px;
+            background-color: #7cb342;
+            margin: 0 auto;"></div>
+    </div>
+    
+    <!-- Step 4 -->
+    <div class="flowchart-step" style="
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="
+                background-color: #33691e;
+                color: white;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                margin-right: 15px;
+                flex-shrink: 0;">4</div>
+            <h3 style="margin: 0; color: #33691e; font-size: 18px;">🔎 For finding most basic site:</h3>
+        </div>
+        
+        <ul style="
+            margin: 0;
+            padding-left: 50px;
+            list-style-type: none;">
+            <li style="
+                margin-bottom: 8px;
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Identify all atoms with lone pairs (typically N, O, S)
+            </li>
+            <li style="
+                margin-bottom: 8px;
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Compare their likely basicity based on the 5 factors
+            </li>
+            <li style="
+                position: relative;
+                padding-left: 20px;">
+                <span style="
+                    position: absolute;
+                    left: 0;
+                    color: #33691e;">•</span>
+                Consider functional group trends: 
+                <span style="font-family: monospace;">R₃N > R₂NH > RNH₂ > NH₃ > ROH > H₂O > RCOOH</span>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- Arrow between steps -->
+    <div style="
+        text-align: center;
+        margin: 20px 0;
+        position: relative;">
+        <div style="
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid #7cb342;
+            margin: 0 auto;"></div>
+        <div style="
+            width: 2px;
+            height: 15px;
+            background-color: #7cb342;
+            margin: 0 auto;"></div>
+    </div>
+    
+    <!-- Step 5 -->
+    <div class="flowchart-step" style="
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="
+                background-color: #33691e;
+                color: white;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                margin-right: 15px;
+                flex-shrink: 0;">5</div>
+            <h3 style="margin: 0; color: #33691e; font-size: 18px;">🔄 For determining conjugate acid/base:</h3>
+        </div>
+        
+        <div style="padding-left: 50px;">
+            <ol style="margin: 0; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">
+                    <strong>Conjugate acid:</strong> Add H⁺ to the most basic site (atom with most available lone pair)
+                </li>
+                <li>
+                    <strong>Conjugate base:</strong> Remove H⁺ from the most acidic site (typically forms most stable anion)
+                </li>
+            </ol>
+        </div>
+    </div>
+    
+    <!-- Arrow between steps -->
+    <div style="
+        text-align: center;
+        margin: 20px 0;
+        position: relative;">
+        <div style="
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid #7cb342;
+            margin: 0 auto;"></div>
+        <div style="
+            width: 2px;
+            height: 15px;
+            background-color: #7cb342;
+            margin: 0 auto;"></div>
+    </div>
+    
+    <!-- Step 6 -->
+    <div class="flowchart-step" style="
+        background-color: white;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+        
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <div style="
+                background-color: #33691e;
+                color: white;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                margin-right: 15px;
+                flex-shrink: 0;">6</div>
+            <h3 style="margin: 0; color: #33691e; font-size: 18px;">➡️ For predicting reaction direction:</h3>
+        </div>
+        
+        <div style="padding-left: 50px;">
+            <p style="margin: 10px 0; text-align: center; font-weight: bold; font-family: monospace; font-size: 16px;">HA + B ⇌ A⁻ + HB⁺</p>
+            
+            <ul style="
+                margin: 0;
+                padding-left: 20px;
+                list-style-type: none;">
+                <li style="
+                    margin-bottom: 8px;
+                    position: relative;
+                    padding-left: 20px;">
+                    <span style="
+                        position: absolute;
+                        left: 0;
+                        color: #33691e;">•</span>
+                    Reaction favors formation of the <span style="font-weight: bold; color: #e53935;">weaker acid and base</span>
+                </li>
+                <li style="
+                    margin-bottom: 8px;
+                    position: relative;
+                    padding-left: 20px;">
+                    <span style="
+                        position: absolute;
+                        left: 0;
+                        color: #33691e;">•</span>
+                    Compare pKa values: Reaction goes from <span style="font-weight: bold; color: #e53935;">LOW pKa to HIGH pKa</span>
+                </li>
+                <li style="
+                    position: relative;
+                    padding-left: 20px;">
+                    <span style="
+                        position: absolute;
+                        left: 0;
+                        color: #33691e;">•</span>
+                    If pKa values are similar, equilibrium will be more balanced
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+<div style="margin-top: 50px; background: linear-gradient(to right, #e8f5e9, #c8e6c9); border-radius: 12px; border: 2px solid #43a047; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -25px; right: -25px; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(76,175,80,0.1) 0%, rgba(76,175,80,0) 70%);"></div>
+    <h2 style="text-align: center; color: #2e7d32; position: relative; display: inline-block; width: 100%; margin-top: 0; margin-bottom: 20px;">
+        <span style="font-size: 24px; margin-right: 8px;">📋</span> In Short: Quick Reference Guide
+        <div style="position: absolute; bottom: -5px; left: 25%; width: 50%; height: 3px; background: linear-gradient(to right, transparent, #2e7d32, transparent);"></div>
+    </h2>
+    <div style="margin-bottom: 25px; background-color: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); border: 1px solid #e0e0e0;">
+        <h3 style="color: #2e7d32; margin-top: 0; border-bottom: 2px solid #e8f5e9; padding-bottom: 8px; display: flex; align-items: center;">
+            <span style="font-size: 20px; margin-right: 8px;">📚</span> Terminology
+        </h3>
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+                    <div style="flex: 1; min-width: 200px; padding: 5px;">
+                        <p><strong>HA</strong>: Neutral acid</p>
+                        <p><strong>A⁻</strong>: Conjugate base of a neutral acid</p>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; padding: 5px;">
+                        <p><strong>HX⁺</strong>: Charged acid</p>
+                        <p><strong>X</strong>: Conjugate base of a charged acid</p>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; padding: 5px;">
+                        <p><strong>B</strong>: Base</p>
+                        <p><strong>HB⁺</strong>: Conjugate acid of a base</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                <div style="flex: 1; min-width: 280px; background-color: #fff; border-radius: 5px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; flex-direction: column;">
+                    <h3 style="color: #e53935; margin-top: 0; text-align: center;">To Find Strongest Acid</h3>
+                    <div style="text-align: center;">HA → A⁻ + H⁺</div>
+                    <div style="display: flex; justify-content: center; margin: 10px 0;">
+                        <div style="border: 2px solid #e53935; border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; font-weight: bold;">?</div>
+                    </div>
+                    <div style="text-align: center; font-weight: bold; margin-bottom: 10px;">Ask yourself: What stabilizes A⁻?</div>
+                    <div style="border-left: 3px solid #e53935; padding-left: 10px; margin-bottom: 10px; flex-grow: 1; min-height: 150px;">
+                        <p><strong>Look for:</strong></p>
+                        <ul style="margin: 5px 0; padding-left: 20px;">
+                            <li>Larger atoms (down a group)</li>
+                            <li>More electronegative atoms (across a period)</li>
+                            <li>Electron-withdrawing groups</li>
+                            <li>Higher s-character</li>
+                            <li>Resonance that stabilizes A⁻</li>
+                        </ul>
+                    </div>
+                    <div style="background-color: #ffebee; border: 1px solid #ef9a9a; border-radius: 5px; padding: 8px; text-align: center; color: #e53935; font-weight: bold;">
+                        More stable A⁻ = Stronger acid
+                    </div>
+                </div>
+                
+                <div style="flex: 1; min-width: 280px; background-color: #fff; border-radius: 5px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; flex-direction: column;">
+                    <h3 style="color: #e53935; margin-top: 0; text-align: center;">For Charged Acids</h3>
+                    <div style="text-align: center;">HX⁺ → X + H⁺</div>
+                    <div style="display: flex; justify-content: center; margin: 10px 0;">
+                        <div style="border: 2px solid #e53935; border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; font-weight: bold;">?</div>
+                    </div>
+                    <div style="text-align: center; font-weight: bold; margin-bottom: 10px;">Ask yourself: What destabilizes HX⁺?</div>
+                    <div style="border-left: 3px solid #e53935; padding-left: 10px; margin-bottom: 10px; flex-grow: 1; min-height: 150px;">
+                        <p><strong>Look for:</strong></p>
+                        <ul style="margin: 5px 0; padding-left: 20px;">
+                            <li>Smaller atoms (up a group)</li>
+                            <li>Less electronegative atoms (across a period)</li>
+                            <li>Electron-withdrawing groups</li>
+                            <li>No resonance stabilization of HX⁺</li>
+                        </ul>
+                    </div>
+                    <div style="background-color: #ffebee; border: 1px solid #ef9a9a; border-radius: 5px; padding: 8px; text-align: center; color: #e53935; font-weight: bold;">
+                        Less stable HX⁺ = Stronger acid
+                    </div>
+                </div>
+                
+                <div style="flex: 1; min-width: 280px; background-color: #fff; border-radius: 5px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                    <h3 style="color: #7b1fa2; margin-top: 0; text-align: center;">To Find Strongest Base</h3>
+                    <div style="text-align: center;">B + H⁺ → BH⁺</div>
+                    <div style="display: flex; justify-content: center; margin: 10px 0;">
+                        <div style="border: 2px solid #7b1fa2; border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; font-weight: bold;">?</div>
+                    </div>
+                    <div style="text-align: center; font-weight: bold; margin-bottom: 10px;">Ask yourself: What destabilizes BH⁺?</div>
+                    <div style="border-left: 3px solid #7b1fa2; padding-left: 10px; margin-bottom: 10px;">
+                        <p><strong>Look for:</strong></p>
+                        <ul style="margin: 5px 0; padding-left: 20px;">
+                            <li>Smaller atoms (up a group)</li>
+                            <li>Less electronegative atoms (across a period)</li>
+                            <li>Electron-donating groups</li>
+                            <li>Lower s-character</li>
+                            <li>No resonance delocalization of lone pair</li>
+                        </ul>
+                    </div>
+                    <div style="background-color: #ffebee; border: 1px solid #7b1fa2; border-radius: 5px; padding: 8px; text-align: center; color: #7b1fa2; font-weight: bold;">
+                        Less stable HB⁺ = Stronger base
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; background-color: #fff; border-radius: 5px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <h3 style="color: #1565c0; margin-top: 0;">Finding Conjugate Pairs</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between;">
+                    <div style="flex: 1; min-width: 250px;">
+                        <p><strong>To find conjugate base:</strong></p>
+                        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+                            <div style="padding: 8px; background-color: #e3f2fd; border-radius: 5px;">HA</div>
+                            <div style="margin: 0 10px;">→</div>
+                            <div style="padding: 8px; background-color: #e3f2fd; border-radius: 5px;">A⁻</div>
+                            <div style="margin: 0 10px;">+</div>
+                            <div style="padding: 8px; background-color: #e3f2fd; border-radius: 5px;">H⁺</div>
+                        </div>
+                        <p style="text-align: center;"><em>Remove H⁺ from the most acidic site</em></p>
+                    </div>
+                    <div style="flex: 1; min-width: 250px;">
+                        <p><strong>To find conjugate acid:</strong></p>
+                        <div style="display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+                            <div style="padding: 8px; background-color: #f3e5f5; border-radius: 5px;">B</div>
+                            <div style="margin: 0 10px;">+</div>
+                            <div style="padding: 8px; background-color: #f3e5f5; border-radius: 5px;">H⁺</div>
+                            <div style="margin: 0 10px;">→</div>
+                            <div style="padding: 8px; background-color: #f3e5f5; border-radius: 5px;">BH⁺</div>
+                        </div>
+                        <p style="text-align: center;"><em>Add H⁺ to the most basic site</em></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; background-color: #fff3e0; border-radius: 5px; padding: 15px; border-left: 5px solid #ff9800;">
+                <p style="font-weight: bold;">Key Principle:</p>
+                <div style="text-align: center; font-size: 1.1em; margin: 10px 0;">
+                    <strong>In Acid-Base Reactions:</strong> Equilibrium favors formation of the <span style="color: #e53935; font-weight: bold;">weaker acid</span> and <span style="color: #7b1fa2; font-weight: bold;">weaker base</span>
+                </div>
+                <div style="text-align: center;">
+                    HA + B ⇌ A⁻ + BH⁺
+                </div>
+                <div style="text-align: center; margin-top: 5px;">
+                    Reaction goes from <span style="color: #e53935; font-weight: bold;">LOW pKa</span> to <span style="color: #e53935; font-weight: bold;">HIGH pKa</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleFactor(id) {
+            const content = document.getElementById(id);
+            const header = content.previousElementSibling;
+            const sign = header.querySelector('span');
+            
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                sign.textContent = '+';
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                sign.textContent = '-';
+            }
+        }
+        
+        function toggleAllFactors() {
+            const factors = [
+                'size-acid', 'en-acid', 'inductive-acid', 'hybrid-acid', 'resonance-acid',
+                'size-base', 'en-base', 'inductive-base', 'hybrid-base', 'resonance-base'
+            ];
+            
+            // Check if the first factor is expanded
+            const firstFactor = document.getElementById(factors[0]);
+            const expandAll = !firstFactor.style.maxHeight;
+            
+            factors.forEach(factor => {
+                const content = document.getElementById(factor);
+                const header = content.previousElementSibling;
+                const sign = header.querySelector('span');
+                
+                if (expandAll) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    sign.textContent = '-';
+                } else {
+                    content.style.maxHeight = null;
+                    sign.textContent = '+';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+<p style="text-align: center; color: #999; margin-top: 30px; font-size: 0.9em;">Created for Dr. Fox </p>
