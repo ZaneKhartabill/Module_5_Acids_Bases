@@ -227,8 +227,7 @@
 <body>
     <div class="flowchart-container">
         <h1>Acid-Base Decision Flowchart</h1>
-        <p style="text-align: center; color: #666; margin-top: -10px; margin-bottom: 15px;">CHM1321 Module 5: Acid-Base Reactions</p>
-        <div style="text-align: center; margin: 20px 0 30px 0;">
+        <div style="text-align: center; margin: 20px 0 10px 0;">
             <button class="toggle-all" onclick="toggleAllFactors()" style="
                 background-color: #1976d2;
                 color: white;
@@ -243,7 +242,90 @@
                 Expand/Collapse All
             </button>
         </div>
-        <div style="margin-bottom: 30px; background-color: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 10px 0 30px 0;">
+            <button onclick="scrollToSection('theory-section')" style="
+                background-color: #2e7d32;
+                color: white;
+                padding: 8px 15px;
+                border: none;
+                border-radius: 6px;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 14px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                display: flex;
+                align-items: center;
+                transition: transform 0.2s, background-color 0.2s;">
+                <span style="margin-right: 6px;">⚡</span> Energy Diagrams
+            </button>
+            
+            <button onclick="scrollToSection('decision-box')" style="
+                background-color: #1976d2;
+                color: white;
+                padding: 8px 15px;
+                border: none;
+                border-radius: 6px;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 14px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                display: flex;
+                align-items: center;
+                transition: transform 0.2s, background-color 0.2s;">
+                <span style="margin-right: 6px;">🔍</span> Factors
+            </button>
+            
+            <button onclick="scrollToSection('flowchart-section')" style="
+                background-color: #33691e;
+                color: white;
+                padding: 8px 15px;
+                border: none;
+                border-radius: 6px;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 14px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                display: flex;
+                align-items: center;
+                transition: transform 0.2s, background-color 0.2s;">
+                <span style="margin-right: 6px;">🎯</span> Decision Flowchart
+            </button>
+            
+            <button onclick="scrollToSection('examples-section')" style="
+                background-color: #f57f17;
+                color: white;
+                padding: 8px 15px;
+                border: none;
+                border-radius: 6px;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 14px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                display: flex;
+                align-items: center;
+                transition: transform 0.2s, background-color 0.2s;">
+                <span style="margin-right: 6px;">✏️</span> Worked Examples
+            </button>
+            
+            <button onclick="scrollToSection('reference-section')" style="
+                background-color: #43a047;
+                color: white;
+                padding: 8px 15px;
+                border: none;
+                border-radius: 6px;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 14px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+                display: flex;
+                align-items: center;
+                transition: transform 0.2s, background-color 0.2s;">
+                <span style="margin-right: 6px;">📋</span> Quick Reference
+            </button>
+        </div>
+        
+        <div id="theory-section" style="margin-bottom: 30px; background-color: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
             <h2 style="text-align: center; color: #2c3e50; margin-bottom: 15px;">Understanding Acid-Base Strength</h2>
             
             <!-- Master Diagram -->
@@ -444,8 +526,7 @@
             </div>
         </div>
         
-        <div class="decision-box" style="background: linear-gradient(to right, #e3f2fd, #bbdefb); padding: 18px; border: none; box-shadow: 0 3px 10px rgba(25,118,210,0.2); position: relative; overflow: hidden;">
-            <div style="position: absolute; top: -30px; right: -30px; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, rgba(25,118,210,0.1) 0%, rgba(25,118,210,0) 70%);"></div>
+        <div id="decision-box" class="decision-box" style="background: linear-gradient(to right, #e3f2fd, #bbdefb); padding: 18px; border: none; box-shadow: 0 3px 10px rgba(25,118,210,0.2); position: relative; overflow: hidden;">            <div style="position: absolute; top: -30px; right: -30px; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, rgba(25,118,210,0.1) 0%, rgba(25,118,210,0) 70%);"></div>
             <div style="position: absolute; bottom: -20px; left: -20px; width: 60px; height: 60px; border-radius: 50%; background: radial-gradient(circle, rgba(25,118,210,0.1) 0%, rgba(25,118,210,0) 70%);"></div>
             <div style="font-size: 20px; font-weight: bold; color: #1976d2; text-shadow: 1px 1px 0 rgba(255,255,255,0.5);">🔍 What are you trying to determine?</div>
         </div>
@@ -719,23 +800,23 @@
         </div>
     </div>
 </div>
-        <div class="application-section" style="
-    background-color: #f1f8e9;
-    border-radius: 10px;
-    border: 2px solid #7cb342;
-    padding: 25px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-    
-    <h2 style="
-        text-align: center;
-        color: #33691e;
-        margin-top: 0;
-        margin-bottom: 25px;
-        padding-bottom: 10px;
-        border-bottom: 2px solid #aed581;
-        font-size: 24px;">Applying These Rules: Decision Flowchart</h2>
+    <div id="flowchart-section" class="application-section" style="
+        background-color: #f1f8e9;
+        border-radius: 10px;
+        border: 2px solid #7cb342;
+        padding: 25px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+        
+        <h2 style="
+            text-align: center;
+            color: #33691e;
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #aed581;
+            font-size: 24px;">Applying These Rules: Decision Flowchart</h2>
     
     <!-- Step 1 -->
     <div class="flowchart-step" style="
@@ -1184,8 +1265,7 @@
         </div>
     </div>
 
-    <div style="margin-top: 40px; background: linear-gradient(135deg, #fff8e1, #ffecb3); border-radius: 12px; padding: 25px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid #ffd54f; position: relative; overflow: hidden;">
-        <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(255,193,7,0.1) 0%, rgba(255,193,7,0) 70%);"></div>
+    <div id="examples-section" style="margin-top: 40px; background: linear-gradient(135deg, #fff8e1, #ffecb3); border-radius: 12px; padding: 25px; margin-bottom: 40px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border: 1px solid #ffd54f; position: relative; overflow: hidden;">        <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(255,193,7,0.1) 0%, rgba(255,193,7,0) 70%);"></div>
         <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, rgba(255,193,7,0.1) 0%, rgba(255,193,7,0) 70%);"></div>
         
         <h2 style="text-align: center; color: #f57f17; margin-top: 0; font-size: 24px; position: relative; display: inline-block; width: 100%;">
@@ -1371,8 +1451,7 @@
 
 </div>
         
-<div style="margin-top: 50px; background: linear-gradient(to right, #e8f5e9, #c8e6c9); border-radius: 12px; border: 2px solid #43a047; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; overflow: hidden;">
-    <div style="position: absolute; top: -25px; right: -25px; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(76,175,80,0.1) 0%, rgba(76,175,80,0) 70%);"></div>
+<div id="reference-section" style="margin-top: 50px; background: linear-gradient(to right, #e8f5e9, #c8e6c9); border-radius: 12px; border: 2px solid #43a047; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; overflow: hidden;">    <div style="position: absolute; top: -25px; right: -25px; width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(76,175,80,0.1) 0%, rgba(76,175,80,0) 70%);"></div>
     <h2 style="text-align: center; color: #2e7d32; position: relative; display: inline-block; width: 100%; margin-top: 0; margin-bottom: 20px;">
         <span style="font-size: 24px; margin-right: 8px;">📋</span> In Short: Quick Reference Guide
         <div style="position: absolute; bottom: -5px; left: 25%; width: 50%; height: 3px; background: linear-gradient(to right, transparent, #2e7d32, transparent);"></div>
@@ -1546,7 +1625,35 @@
                 }
             });
         }
+        
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                // Apply a subtle highlight effect
+                const originalBackground = section.style.background;
+                section.style.transition = "background 0.5s ease";
+                
+                // Scroll to the section with smooth behavior
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Add a subtle highlight effect
+                setTimeout(() => {
+                    section.style.background = "rgba(255, 255, 0, 0.2)";
+                    
+                    // Return to original background after the highlight
+                    setTimeout(() => {
+                        section.style.background = originalBackground;
+                    }, 1000);
+                }, 500);
+            }
+        }
     </script>
 </body>
 </html>
-<p style="text-align: center; color: #999; margin-top: 30px; font-size: 0.9em;">Created for Dr. Fox </p>
+<div style="text-align: center; margin-top: 30px; padding: 15px; border-top: 1px solid #ddd;">
+    <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;">Created for Dr. Fox</p>
+    <p style="color: #666; font-size: 0.9em;">
+        <span style="margin-right: 5px;">📧</span> Contact (would love your feedback/suggestions!): 
+        <a href="mailto:mkhal061@uottawa.ca" style="color: #1976d2; text-decoration: none; border-bottom: 1px dotted #1976d2;">mkhal061@uottawa.ca</a>
+    </p>
+</div>
